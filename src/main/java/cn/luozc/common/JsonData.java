@@ -13,6 +13,7 @@ import java.util.Map;
 @Setter
 public class JsonData {
 
+
     private boolean status;
 
     private String msg;
