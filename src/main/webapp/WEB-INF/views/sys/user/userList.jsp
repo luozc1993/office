@@ -21,7 +21,7 @@
                 <div class="layui-input-inline">
                     <input type="text" class="layui-input searchVal" placeholder="请输入搜索的内容" />
                 </div>
-                <a class="layui-btn layui-btn-sm search_btn layui-btn-sm" data-type="reload">搜索</a>
+                <a class="layui-btn layui-btn-sm search_btn layui-btn-sm " data-type="reload">搜索</a>
             </div>
             <div class="layui-inline">
                 <a class="layui-btn layui-btn-sm layui-btn-normal addNews_btn">添加用户</a>

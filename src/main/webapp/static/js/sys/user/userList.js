@@ -5,67 +5,70 @@ layui.use(['form','layer','table','laytpl'],function(){
         laytpl = layui.laytpl,
         table = layui.table;
 
-    //用户列表
-    var tableIns = table.render({
-        elem: '#userList',
-        url : '/sys/user/getUserList.json',
-        cellMinWidth : 95,
-        page : true,
-        limits : [10,15,20,25],
-        limit : 20,
-        toolbar: '#toolbar',
-        id : "userListTable",
-        cols : [[
-            {type: "checkbox", fixed:"left", width:42},
-            {field: 'username', title: '用户名', minWidth:100, align:"center"},
-            {field: 'telephone', title: '手机号', minWidth:120, align:"center"},
- /*           {field: 'mail', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
-                return '<a class="layui-blue" href="mailto:'+d.mail+'">'+d.mail+'</a>';
-            }},*/
-            {field: 'status', title: '状态',minWidth:80, align:'center',templet:function(d){
-                    if(d.status ==null||d.status=="0"){
-                        return  '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="usable">已启用</a>'
-                    }else{
-                        return '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="usable">已禁用</a>'
-                    }
-                    return s;
-            }},
-            {field: 'grade', title: '用户等级', minWidth:100,align:'center',templet:function(d){
-                var grade = d["grade"];
-                if(grade == "0"){
-                    return "注册会员";
-                }else if(grade == "1"){
-                    return "中级会员";
-                }else if(grade == "2"){
-                    return "高级会员";
-                }else if(grade == "3"){
-                    return "钻石会员";
-                }else if(grade == "4"){
-                    return "超级会员";
-                }
-            }},
-            {field: 'lastlogintime', title: '最后登录时间', align:'center',minWidth:150,templet:function(d){
-                return timestampToTime(d.lastlogintime.time/1000,"yyyy-MM-dd HH:mm");
-                }},
-            {title: '操作', minWidth:120, templet:'#userListBar',fixed:"right",align:"center"}
-        ]]
-    });
+    tableFun();
 
-    //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
-    $(".search_btn").on("click",function(){
-        if($(".searchVal").val() != ''){
-            table.reload("newsListTable",{
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                },
-                where: {
-                    key: $(".searchVal").val()  //搜索的关键字
-                }
-            })
-        }else{
-            layer.msg("请输入搜索的内容");
-        }
-    });
+
+
+
+    function tableFun(){
+        //用户列表
+        var tableIns = table.render({
+            elem: '#userList',
+            url : '/sys/user/getUserList.json?key='+isNull($(".searchVal").val()),
+            cellMinWidth : 95,
+            page : true,
+            limits : [10,15,20,25],
+            limit : 10,
+            toolbar: '#toolbar',
+            id : "userListTable",
+            cols : [[
+                {type: "checkbox", fixed:"left", width:42},
+                {field: 'username', title: '用户名', minWidth:100, align:"center"},
+                {field: 'telephone', title: '手机号', minWidth:120, align:"center"},
+                /*           {field: 'mail', title: '用户邮箱', minWidth:200, align:'center',templet:function(d){
+                               return '<a class="layui-blue" href="mailto:'+d.mail+'">'+d.mail+'</a>';
+                           }},*/
+                {field: 'status', title: '状态',minWidth:80, align:'center',templet:function(d){
+                        if(d.status ==null||d.status=="0"){
+                            return  '<a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="usable">已启用</a>'
+                        }else{
+                            return '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="usable">已禁用</a>'
+                        }
+                        return s;
+                    }},
+                {field: 'grade', title: '用户等级', minWidth:100,align:'center',templet:function(d){
+                        var grade = d["grade"];
+                        if(grade == "0"){
+                            return "注册会员";
+                        }else if(grade == "1"){
+                            return "中级会员";
+                        }else if(grade == "2"){
+                            return "高级会员";
+                        }else if(grade == "3"){
+                            return "钻石会员";
+                        }else if(grade == "4"){
+                            return "超级会员";
+                        }
+                    }},
+                {field: 'lastLoginTime', title: '最后登录时间', align:'center',minWidth:150,templet:function(d){
+                        return timestampToTime(d.lastLoginTime.time/1000,"yyyy-MM-dd HH:mm");
+                    }},
+                {title: '操作', minWidth:120, templet:'#userListBar',fixed:"right",align:"center"}
+            ]]
+        });
+        //搜索【此功能需要后台配合，所以暂时没有动态效果演示】
+        $(".search_btn").on("click",function(){
+            var search = $(".searchVal").val();
+            if( search != ''){
+                tableFun();
+            }else{
+                layer.msg("请输入搜索的内容");
+            }
+        });
+    }
+
+
+
 
     //添加用户
     function addUser(edit){

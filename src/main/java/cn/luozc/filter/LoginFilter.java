@@ -40,16 +40,15 @@ public class LoginFilter implements Filter {
         for (String str :arr) {
         }
         boolean exclusion = isExclusion (servletPath);
-        SysUser sysUser = (SysUser)req.getSession().getAttribute("user");
-        if (sysUser == null&&!exclusion) {
-            String path = "/user/login";
-            resp.sendRedirect(path);
-            return;
-        }
-        RequestHolder.add(sysUser);
-        RequestHolder.add(req);
+//        SysUser sysUser = (SysUser)req.getSession().getAttribute("user");
+//        if (sysUser == null&&!exclusion) {
+//            String path = "/user/login";
+//            resp.sendRedirect(path);
+//            return;
+//        }
+        //RequestHolder.add(sysUser);
+        //RequestHolder.add(req);
         filterChain.doFilter(servletRequest, servletResponse);
-        return;
     }
 
     @Override

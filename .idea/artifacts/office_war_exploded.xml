@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="office:war exploded">
     <output-path>$PROJECT_DIR$/target/pers</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>office</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -51,6 +58,7 @@
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.2" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
           <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.8.3" />
+          <element id="library" level="project" name="Maven: com.auth0:java-jwt:3.8.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
