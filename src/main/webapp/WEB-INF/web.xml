@@ -70,10 +70,10 @@
 
   <filter>
     <filter-name>loginFilter</filter-name>
-    <filter-class>cn.luozc.filter.LoginFilter</filter-class>
+    <filter-class>cn.luozc.common.filter.LoginFilter</filter-class>
     <init-param>
       <param-name>whiteList</param-name>
-      <param-value>*.js,*.css,*.jpg,*.png,*.ico,*.html,*.gif,/sys/druid/*,/static/*,/user/*</param-value>
+      <param-value>*.js,*.css,*.jpg,*.png,*.ico,*.html,*.gif,/sys/druid/*,/static/*,/system/user/login</param-value>
     </init-param>
   </filter>
   <filter-mapping>

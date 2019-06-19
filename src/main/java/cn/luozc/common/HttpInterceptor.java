@@ -31,6 +31,7 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
         Map parameterMap = request.getParameterMap();
         log.info("request start. url:{}, params:{}", url, JsonMapper.obj2String(parameterMap));
         long start = System.currentTimeMillis();
+        response.setHeader("Access-Control-Allow-Origin", "*");
         request.setAttribute(START_TIME, start);
         return true;
     }
@@ -71,6 +72,6 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
     }
 
     public void removeThreadLocalInfo() {
-        RequestHolder.remove();;
+
     }
 }

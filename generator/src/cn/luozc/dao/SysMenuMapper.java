@@ -1,7 +1,5 @@
 package cn.luozc.dao;
 
-import cn.luozc.model.SysMenu;
-
 public interface SysMenuMapper {
     int deleteByPrimaryKey(Integer id);
 

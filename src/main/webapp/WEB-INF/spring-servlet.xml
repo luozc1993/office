@@ -15,8 +15,8 @@
     </mvc:interceptors>
 
     <!-- 启动包扫描功能 -->
-    <context:component-scan base-package="cn.luozc.controller" />
-    <context:component-scan base-package="cn.luozc.service" />
+    <context:component-scan base-package="cn.luozc.modules.*.service" />
+    <context:component-scan base-package="cn.luozc.modules.*.controller" />
     <mvc:resources location="/static/" mapping="/static/**"/>
     <!--获取spring上下文-->
     <bean class="cn.luozc.common.ApplicationContextHelper" lazy-init="false"/>

@@ -1,42 +1,38 @@
-package cn.luozc.model;
-
-import java.util.Date;
+package cn.luozc.modules.common.model;
 
 public class SysUser {
-    private Integer id;
+    private String id;
 
     private String username;
 
-    private String telephone;
-
-    private String mail;
-
     private String password;
 
-    private Integer status;
+    private String nickname;
 
-    private String remark;
-
-    private String operator;
-
-    private Date operateTime;
-
-    private String operateIp;
+    private String avatar;
 
     private String sex;
 
-    private Integer grade;
+    private String phone;
 
-    private Date lastlogintime;
+    private String email;
 
-    private String lastloginip;
+    private Boolean emailverified;
 
-    public Integer getId() {
+    private Boolean state;
+
+    private String opuser;
+
+    private Long createTime;
+
+    private Long updateTime;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(String id) {
+        this.id = id == null ? null : id.trim();
     }
 
     public String getUsername() {
@@ -47,22 +43,6 @@ public class SysUser {
         this.username = username == null ? null : username.trim();
     }
 
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail == null ? null : mail.trim();
-    }
-
     public String getPassword() {
         return password;
     }
@@ -71,44 +51,20 @@ public class SysUser {
         this.password = password == null ? null : password.trim();
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public String getRemark() {
-        return remark;
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator == null ? null : operator.trim();
-    }
-
-    public Date getOperateTime() {
-        return operateTime;
-    }
-
-    public void setOperateTime(Date operateTime) {
-        this.operateTime = operateTime;
-    }
-
-    public String getOperateIp() {
-        return operateIp;
-    }
-
-    public void setOperateIp(String operateIp) {
-        this.operateIp = operateIp == null ? null : operateIp.trim();
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
     }
 
     public String getSex() {
@@ -119,27 +75,59 @@ public class SysUser {
         this.sex = sex == null ? null : sex.trim();
     }
 
-    public Integer getGrade() {
-        return grade;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setGrade(Integer grade) {
-        this.grade = grade;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
-    public Date getLastlogintime() {
-        return lastlogintime;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastlogintime(Date lastlogintime) {
-        this.lastlogintime = lastlogintime;
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
-    public String getLastloginip() {
-        return lastloginip;
+    public Boolean getEmailverified() {
+        return emailverified;
     }
 
-    public void setLastloginip(String lastloginip) {
-        this.lastloginip = lastloginip == null ? null : lastloginip.trim();
+    public void setEmailverified(Boolean emailverified) {
+        this.emailverified = emailverified;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
+    }
+
+    public String getOpuser() {
+        return opuser;
+    }
+
+    public void setOpuser(String opuser) {
+        this.opuser = opuser == null ? null : opuser.trim();
+    }
+
+    public Long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Long createTime) {
+        this.createTime = createTime;
+    }
+
+    public Long getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Long updateTime) {
+        this.updateTime = updateTime;
     }
 }

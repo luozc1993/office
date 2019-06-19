@@ -1,4 +1,4 @@
-package cn.luozc.model;
+package cn.luozc.modules.common.model;
 
 public class SysMenu {
     private Integer id;

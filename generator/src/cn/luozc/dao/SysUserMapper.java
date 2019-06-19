@@ -1,15 +1,13 @@
 package cn.luozc.dao;
 
-import cn.luozc.model.SysUser;
-
 public interface SysUserMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String id);
 
     int insert(SysUser record);
 
     int insertSelective(SysUser record);
 
-    SysUser selectByPrimaryKey(Integer id);
+    SysUser selectByPrimaryKey(String id);
 
     int updateByPrimaryKeySelective(SysUser record);
 
