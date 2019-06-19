@@ -5,6 +5,7 @@ import cn.luozc.common.utils.MD5Util;
 import cn.luozc.common.utils.TokenUtil;
 import cn.luozc.modules.system.model.SysUser;
 import cn.luozc.modules.system.service.UserService;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,5 +45,17 @@ public class UserController {
         //添加用户
         user = userService.insert(user);
         return JsonData.success(user);
+    }
+    @RequestMapping("/userList")
+    @ResponseBody
+    public JSONObject userList(){
+        JSONObject result = new JSONObject();
+
+        result.put("code",0);
+        result.put("msg","");
+        result.put("count",0);
+        result.put("data",userService.list());
+
+        return result;
     }
 }

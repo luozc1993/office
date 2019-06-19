@@ -2,7 +2,9 @@ package cn.luozc.modules.system.dao;
 
 import cn.luozc.modules.system.model.SysUser;
 
-public interface SysUserMapper {
+import java.util.List;
+
+public interface SysUserDao {
     int deleteByPrimaryKey(String id);
 
     int insert(SysUser record);
@@ -14,4 +16,6 @@ public interface SysUserMapper {
     int updateByPrimaryKeySelective(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    List<SysUser> selectPage(int start,int end);
 }

@@ -1,7 +1,8 @@
 package cn.luozc.common;
 
-import cn.luozc.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.json.JSONObject;
+import netscape.javascript.JSObject;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -29,7 +30,7 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String url = request.getRequestURI().toString();
         Map parameterMap = request.getParameterMap();
-        log.info("request start. url:{}, params:{}", url, JsonMapper.obj2String(parameterMap));
+        log.info("request start. url:{}, params:{}", url, JSONObject.fromObject(parameterMap).toString());
         long start = System.currentTimeMillis();
         response.setHeader("Access-Control-Allow-Origin", "*");
         request.setAttribute(START_TIME, start);
