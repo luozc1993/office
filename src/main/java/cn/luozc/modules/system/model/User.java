@@ -7,7 +7,7 @@ public class User {
 
     private String password;
 
-    private String nickname;
+    private String nickName;
 
     private String avatar;
 
@@ -52,11 +52,11 @@ public class User {
     }
 
     public String getNickname() {
-        return nickname;
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+    public void setNickname(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public String getAvatar() {

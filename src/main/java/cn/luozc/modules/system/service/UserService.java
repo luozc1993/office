@@ -18,4 +18,13 @@ public class UserService {
 
         return userDao.selectPage(map);
     }
+
+    public int count(Map<String,Object> map){
+
+        return userDao.count(map);
+    }
+
+    public int insert(User user){
+        return userDao.insertSelective(user);
+    }
 }
