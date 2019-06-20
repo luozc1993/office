@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.luozc.modules.system.dao.IRoleDao">
+    <resultMap id="BaseResultMap" type="cn.luozc.modules.system.model.Role">
+        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="comments" property="comments" jdbcType="VARCHAR"/>
+        <result column="isDelete" property="isdelete" jdbcType="BIT"/>
+        <result column="opUser" property="opuser" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="BIGINT"/>
+        <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="rid" property="rid" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, role_name, comments, isDelete, opUser, create_time, update_time, uid, rid
+    </sql>
+
+    <!--通过id查询信息-->
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+    <!--通过id删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from sys_role
+        where id = #{id,jdbcType=VARCHAR}
+     </delete>
+    <!--添加数据-->
+    <insert id="insertSelective" parameterType="cn.luozc.modules.system.model.Role">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="comments != null">
+                comments,
+            </if>
+            <if test="isdelete != null">
+                isDelete,
+            </if>
+            <if test="opuser != null">
+                opUser,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="rid != null">
+                rid,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="comments != null">
+                #{comments,jdbcType=VARCHAR},
+            </if>
+            <if test="isdelete != null">
+                #{isdelete,jdbcType=BIT},
+            </if>
+            <if test="opuser != null">
+                #{opuser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="rid != null">
+                #{rid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <!--修改数据-->
+    <update id="updateByPrimaryKeySelective" parameterType="cn.luozc.modules.system.model.Role">
+        update sys_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="comments != null">
+                comments = #{comments,jdbcType=VARCHAR},
+            </if>
+            <if test="isdelete != null">
+                isDelete = #{isdelete,jdbcType=BIT},
+            </if>
+            <if test="opuser != null">
+                opUser = #{opuser,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=BIGINT},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="rid != null">
+                rid = #{rid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <!--分页条件模糊查询-->
+    <select id="selectPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        <where>
+            <if test="keyword != null and keyword != ''">
+                or role_name like concat('%',#{keyword},'%')
+                or comments like concat('%',#{keyword},'%')
+            </if>
+        </where>
+        limit #{start},#{end}
+    </select>
+    <!--查询数据总量-->
+    <select id="count" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(*) from sys_role
+        <where>
+            <if test="roleName != null and roleName != ''">
+                or roleName like concat('%',#{keyword},'%')
+            </if>
+            <if test="comments != null and comments != ''">
+                or comments like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

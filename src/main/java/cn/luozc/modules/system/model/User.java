@@ -51,11 +51,11 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getNickname() {
+    public String getNickName() {
         return nickName;
     }
 
-    public void setNickname(String nickName) {
+    public void setNickName(String nickName) {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 

@@ -129,19 +129,18 @@
             elem: '#tableUser',
             url: serverUrl+'/system/user/userList?token='+token,
             page: true,
-            cellMinWidth: 100,
             cols: [[
                 {type: 'numbers', title: '#'},
-                {field: 'username', sort: true, title: '账号'},
-                {field: 'nickName', sort: true, title: '用户名'},
-                {field: 'sex', sort: true, title: '性别'},
+                {field: 'username',  title: '账号'},
+                {field: 'nickName',  title: '用户名'},
+                {field: 'sex',  title: '性别'},
                 {
-                    field: 'createTime', sort: true, templet: function (d) {
+                    field: 'createTime',  templet: function (d) {
                         return util.toDateString(d.createTime);
                     }, title: '创建时间'
                 },
-                {field: 'state', sort: true, templet: '#tableStateUser', title: '状态'},
-                {align: 'center', toolbar: '#tableBarUser', title: '操作', minWidth: 200}
+                {field: 'state',  templet: '#tableStateUser', title: '状态'},
+                {align: 'center', toolbar: '#tableBarUser', title: '操作', minWidth: 120}
             ]]
         });
 
@@ -226,37 +225,7 @@
 			})
         });
 
-        // 重置密码
-        function resetPsw(userId, nickName) {
-            layer.confirm('确定要重置“' + nickName + '”的登录密码为123456吗？', {
-                skin: 'layui-layer-admin',
-                shade: .1
-            }, function (i) {
-                layer.close(i);
-                layer.load(2);
-				
-				sysAjax(serverUrl+'/system/user/initPassword',{
-				    userId: userId
-				},"get",function(res){
-					if(res.status){
-						layer.msg(res.msg, {icon: 1});
-					}else{
-						layer.msg(res.msg, {icon: 2});
-					}
-				})
-				
-                $.get(serverUrl+'/system/user/updateUserState', {
-                    userId: userId
-                }, function (res) {
-                    layer.closeAll('loading');
-                    if (res.code == 200) {
-                        layer.msg(res.msg, {icon: 1});
-                    } else {
-                        layer.msg(res.msg, {icon: 2});
-                    }
-                }, 'json');
-            });
-        }
+        
 
     });
 </script>

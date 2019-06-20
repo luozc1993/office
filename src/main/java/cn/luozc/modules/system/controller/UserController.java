@@ -8,6 +8,7 @@ import cn.luozc.modules.system.service.UserService;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -26,57 +27,89 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public JsonData login(String username,String password,HttpServletRequest request){
+    public JsonData login(String username, String password, HttpServletRequest request) {
         String sign = TokenUtil.sign(username, "123");
-        if(sign==null){
+        if (sign == null) {
             return JsonData.fail("登录失败");
         }
         return JsonData.success(sign);
     }
 
     /**
-     *  创建用户
-     * @param user      用户信息
-     * @param roleId    关联的角色id
-     * @return          JsonData
+     * 创建用户
+     *
+     * @param user   用户信息
+     * @param roleId 关联的角色id
+     * @return JsonData
      */
     @RequestMapping("/createUser")
     @ResponseBody
-    public JsonData createUser(User user, String roleId){
+    public JsonData createUser(User user, String roleId) {
         //默认密码123456
         user.setPassword(MD5Util.getMD5Str("123456"));
         user.setId(MD5Util.getMD5Str(UUID.randomUUID().toString()));
-        return JsonData.success( userService.insert(user));
+        return JsonData.success(userService.insert(user));
+    }
+
+    /**
+     * 修改用户
+     *
+     * @param user   用户信息
+     * @param roleId 关联的角色id
+     * @return JsonData
+     */
+    @RequestMapping("/updateUser")
+    @ResponseBody
+    public JsonData updateUser(User user, String roleId) {
+        //默认密码123456
+        return JsonData.success(userService.update(user));
     }
 
     /**
      * 用户列表
-     * @param page      页数
-     * @param limit     每页显示数量
-     * @param username  账号
-     * @param nickName  昵称
-     * @param sex       性别
-     * @return          JSONObject
+     *
+     * @param page  页数
+     * @param limit 每页显示数量
+     * @return JSONObject
      */
     @RequestMapping("/userList")
     @ResponseBody
-    public JSONObject userList(int page,int limit,String username,String nickName,String sex){
+    public JSONObject userList(@RequestParam Map<String, Object> map, int page, int limit) {
         //加工查询参数
-        Map<String,Object> map = new HashMap<>();
-        map.put("start",(page-1)*limit);
-        map.put("end",page*limit);
-        map.put("username",username);
-        map.put("nickName",nickName);
-        map.put("sex",sex);
-
-
+        map.put("start", (page - 1) * limit);
+        map.put("end", page * limit);
         //返回值
         JSONObject result = new JSONObject();
-        result.put("code",0);
-        result.put("msg","");
-        result.put("count",userService.count(map));
-        result.put("data",userService.list(map));
+        result.put("code", 0);
+        result.put("msg", "");
+        result.put("count", userService.count(map));
+        result.put("data", userService.list(map));
 
         return result;
     }
+
+    /**
+     * 刪除
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/deleteUser")
+    @ResponseBody
+    public JsonData deleteUser(String userId) {
+        userService.delete(userId);
+        return JsonData.success("","删除成功");
+    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("/updateUserState")
+    @ResponseBody
+    public JsonData updateUserState(@RequestParam Map<String, Object> map){
+        userService.updateUserState(map);
+
+        return JsonData.success("","修改成功");
+    }
+
 }

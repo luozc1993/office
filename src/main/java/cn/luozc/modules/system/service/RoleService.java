@@ -1,11 +1,12 @@
 package cn.luozc.modules.system.service;
 
+import cn.luozc.modules.system.model.Role;
 import cn.luozc.modules.system.model.User;
 
 import java.util.List;
 import java.util.Map;
 
-public interface UserService {
+public interface RoleService {
 
     /**
      * @param map
@@ -22,34 +23,27 @@ public interface UserService {
     int count(Map<String, Object> map);
 
     /**
-     * 添加用户
+     * 添加
      *
-     * @param user
+     * @param record
      * @return
      */
-    int insert(User user);
+    int insert(Role record);
 
     /**
-     * 修改用户
+     * 修改
      *
-     * @param user
+     * @param record
      * @return
      */
-    int update(User user);
+    int update(Role record);
 
     /**
-     * 刪除用戶
+     * 刪除
      *
-     * @param userId
+     * @param id
      * @return
      */
-    int delete(String userId);
+    int delete(String id);
 
-    /**
-     * 修改用户状态
-     *
-     * @param map
-     * @return
-     */
-    int updateUserState(Map<String, Object> map);
 }
