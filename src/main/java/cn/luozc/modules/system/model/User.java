@@ -1,6 +1,6 @@
 package cn.luozc.modules.system.model;
 
-public class SysUser {
+public class User {
     private String id;
 
     private String username;

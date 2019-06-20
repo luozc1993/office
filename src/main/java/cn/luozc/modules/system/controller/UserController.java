@@ -3,7 +3,7 @@ package cn.luozc.modules.system.controller;
 import cn.luozc.common.utils.JsonData;
 import cn.luozc.common.utils.MD5Util;
 import cn.luozc.common.utils.TokenUtil;
-import cn.luozc.modules.system.model.SysUser;
+import cn.luozc.modules.system.model.User;
 import cn.luozc.modules.system.service.UserService;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -39,11 +39,9 @@ public class UserController {
      */
     @RequestMapping("/createUser")
     @ResponseBody
-    public JsonData createUser(SysUser user, String roleId){
+    public JsonData createUser(User user, String roleId){
         //默认密码123456
         user.setPassword(MD5Util.getMD5Str("123456"));
-        //添加用户
-        user = userService.insert(user);
         return JsonData.success(user);
     }
     @RequestMapping("/userList")
