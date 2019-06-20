@@ -22,9 +22,22 @@
     opUser, create_time, update_time
 
   </sql>
-  <select id="selectPage" parameterType="java.lang.Integer" resultType="cn.luozc.modules.system.model.User">
+  <!--分页条件模糊查询-->
+  <select id="selectPage" parameterType="java.util.Map" resultType="cn.luozc.modules.system.model.User">
     select
     <include refid="Base_Column_List" />
     from sys_user
+    <where>
+      <if test="username != null and username != ''">
+        and username like concat('%',#{username},'%')
+      </if>
+      <if test="nickName != null and nickName != ''">
+        and nickName like concat('%',#{nickName},'%')
+      </if>
+      <if test="sex != null and sex != ''">
+        and sex = #{sex}
+      </if>
+    </where>
+    limit #{start},#{end}
   </select>
 </mapper>

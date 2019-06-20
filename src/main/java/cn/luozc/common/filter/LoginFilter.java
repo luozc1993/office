@@ -37,7 +37,6 @@ public class LoginFilter implements Filter {
         boolean exclusion = isExclusion (servletPath);
         String token = req.getParameter("token");
         if (!exclusion) {
-            System.err.println(TokenUtil.verify(token));
             if(token==null|| !TokenUtil.verify(token)){
                 res.sendError(401,"token错误");
             }

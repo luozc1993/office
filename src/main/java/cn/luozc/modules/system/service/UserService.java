@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -13,7 +14,8 @@ public class UserService {
     private UserDao userDao;
 
 
-    public List<User> list(){
-        return userDao.selectPage(0,1);
+    public List<User> list(Map<String,Object> map){
+
+        return userDao.selectPage(map);
     }
 }

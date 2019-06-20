@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/system/user")
@@ -46,13 +48,22 @@ public class UserController {
     }
     @RequestMapping("/userList")
     @ResponseBody
-    public JSONObject userList(){
-        JSONObject result = new JSONObject();
+    public JSONObject userList(int page,int limit,String username,String nickName,String sex){
 
+        Map<String,Object> map = new HashMap<>();
+        map.put("start",(page-1)*limit);
+        map.put("end",page*limit);
+        map.put("username",username);
+        map.put("nickName",nickName);
+        map.put("sex",sex);
+
+
+
+        JSONObject result = new JSONObject();
         result.put("code",0);
         result.put("msg","");
         result.put("count",0);
-        result.put("data",userService.list());
+        result.put("data",userService.list(map));
 
         return result;
     }
