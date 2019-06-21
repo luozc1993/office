@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.luozc.modules.system.dao.IRoleDao">
+<mapper namespace="cn.luozc.modules.system.dao.RoleMapper">
     <resultMap id="BaseResultMap" type="cn.luozc.modules.system.model.Role">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
@@ -9,11 +9,9 @@
         <result column="opUser" property="opuser" jdbcType="VARCHAR"/>
         <result column="create_time" property="createTime" jdbcType="BIGINT"/>
         <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
-        <result column="uid" property="uid" jdbcType="VARCHAR"/>
-        <result column="rid" property="rid" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, role_name, comments, isDelete, opUser, create_time, update_time, uid, rid
+        id, role_name, comments, isDelete, opUser, create_time, update_time
     </sql>
 
     <!--通过id查询信息-->
@@ -53,12 +51,6 @@
             <if test="updateTime != null">
                 update_time,
             </if>
-            <if test="uid != null">
-                uid,
-            </if>
-            <if test="rid != null">
-                rid,
-            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -81,12 +73,6 @@
             </if>
             <if test="updateTime != null">
                 #{updateTime,jdbcType=BIGINT},
-            </if>
-            <if test="uid != null">
-                #{uid,jdbcType=VARCHAR},
-            </if>
-            <if test="rid != null">
-                #{rid,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -111,12 +97,6 @@
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=BIGINT},
-            </if>
-            <if test="uid != null">
-                uid = #{uid,jdbcType=VARCHAR},
-            </if>
-            <if test="rid != null">
-                rid = #{rid,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=VARCHAR}

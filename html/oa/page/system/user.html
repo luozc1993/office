@@ -97,11 +97,9 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色</label>
             <div class="layui-input-block">
-                <select name="roleId" lay-verType="tips" lay-verify="required">
+                <select name="id" id="roleId" lay-verType="tips" lay-verify="required">
                     <option value="">请选择角色</option>
-                    <option value="1">管理员</option>
-                    <option value="2">普通用户</option>
-                    <option value="3">游客</option>
+					[options]
                 </select>
             </div>
         </div>
@@ -123,7 +121,14 @@
         var table = layui.table;
         var util = layui.util;
         var admin = layui.admin;
+		
+		var option = '';
 
+		sysAjax('/system/role/list',{"page":1,"limit":999},"post",function(res){
+			$.each(res.data,function(i,obj){
+				option += '<option value="'+obj.id+'">'+obj.roleName+'</option>'
+			})
+		})
         // 渲染表格
         var insTb = table.render({
             elem: '#tableUser',
@@ -166,13 +171,13 @@
                 resetPsw(data.id, data.nickName);
             }
         });
-
+		
         // 显示表单弹窗
         function showEditModel(mUser) {
             admin.open({
                 type: 1,
                 title: (mUser ? '修改' : '添加') + '用户',
-                content: $('#modelUser').html(),
+                content: testHtmlReplaceContent($('#modelUser').html(),{"options":option}),
                 success: function (layero, dIndex) {
                     $(layero).children('.layui-layer-content').css('overflow', 'visible');
                     var url = mUser ? serverUrl+'/system/user/updateUser' :serverUrl+'/system/user/createUser';

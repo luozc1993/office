@@ -1,6 +1,6 @@
 package cn.luozc.modules.system.service.impl;
 
-import cn.luozc.modules.system.dao.IUserDao;
+import cn.luozc.modules.system.dao.UserMapper;
 import cn.luozc.modules.system.model.User;
 import cn.luozc.modules.system.service.UserService;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Resource
-    private IUserDao IUserDao;
+    private UserMapper IUserDao;
 
     /**
      * @param map

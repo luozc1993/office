@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.luozc.modules.system.dao.IUserDao">
+<mapper namespace="cn.luozc.modules.system.dao.UserMapper">
     <resultMap id="BaseResultMap" type="cn.luozc.modules.system.model.User">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
@@ -15,6 +15,11 @@
         <result column="opUser" jdbcType="VARCHAR" property="opuser"/>
         <result column="create_time" jdbcType="BIGINT" property="createTime"/>
         <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+
+        <collection  property="roles"  ofType="cn.luozc.modules.system.model.Role">
+            <id property="id" column="id" />
+            <result property="role_name" column="roleName" />
+        </collection>
     </resultMap>
     <sql id="Base_Column_List">
 
@@ -23,10 +28,15 @@
 
     </sql>
     <!--分页条件模糊查询-->
-    <select id="selectPage" parameterType="java.util.Map" resultType="cn.luozc.modules.system.model.User">
+    <select id="selectPage" parameterType="java.util.Map" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from sys_user
+        u.id, u.username, u.password, u.nickName, u.avatar, u.sex, u.phone, u.email, u.emailVerified, u.state,
+        u.opUser, u.create_time, u.update_time,r.id as rid,r.*
+        from sys_user u
+
+        left join sys_user_role  ur on  u.id = ur.uid
+        left join sys_role r on ur.rid = r.id
+
         <where>
             <if test="username != null and username != ''">
                 and username like concat('%',#{username},'%')

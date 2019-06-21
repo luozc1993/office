@@ -4,6 +4,8 @@ import cn.luozc.common.utils.JsonData;
 import cn.luozc.common.utils.MD5Util;
 import cn.luozc.common.utils.TokenUtil;
 import cn.luozc.modules.system.model.User;
+import cn.luozc.modules.system.model.UserRole;
+import cn.luozc.modules.system.service.UserRoleService;
 import cn.luozc.modules.system.service.UserService;
 import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,8 @@ public class UserController {
 
     @Resource
     private UserService userService;
+    @Resource
+    private UserRoleService userRoleService;
 
 
     @RequestMapping("/login")
@@ -44,11 +48,15 @@ public class UserController {
      */
     @RequestMapping("/createUser")
     @ResponseBody
-    public JsonData createUser(User user, String roleId) {
+    public JsonData createUser(User user, String roleId,String token) {
         //默认密码123456
         user.setPassword(MD5Util.getMD5Str("123456"));
         user.setId(MD5Util.getMD5Str(UUID.randomUUID().toString()));
-        return JsonData.success(userService.insert(user));
+        int insert = userService.insert(user);
+        if(insert>0){
+            userRoleService.save(new UserRole(user.getId(),roleId,TokenUtil.getUserId(token)));
+        }
+        return JsonData.success();
     }
 
     /**

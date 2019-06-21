@@ -1,5 +1,7 @@
 package cn.luozc.modules.system.model;
 
+import java.util.List;
+
 public class User {
     private String id;
 
@@ -26,6 +28,17 @@ public class User {
     private Long createTime;
 
     private Long updateTime;
+
+    private List<Role> roles;
+
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     public String getId() {
         return id;

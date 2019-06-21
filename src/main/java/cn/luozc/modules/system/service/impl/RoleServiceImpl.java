@@ -1,6 +1,6 @@
 package cn.luozc.modules.system.service.impl;
 
-import cn.luozc.modules.system.dao.IRoleDao;
+import cn.luozc.modules.system.dao.RoleMapper;
 import cn.luozc.modules.system.model.Role;
 import cn.luozc.modules.system.model.User;
 import cn.luozc.modules.system.service.RoleService;
@@ -14,7 +14,7 @@ import java.util.Map;
 public class RoleServiceImpl implements RoleService {
 
     @Resource
-    private IRoleDao iRoleDao;
+    private RoleMapper iRoleDao;
 
     @Override
     public List<User> list(Map<String, Object> map) {

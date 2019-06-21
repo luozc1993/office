@@ -33,7 +33,6 @@ layui.config({
 	
 	
 	token = admin.getTempData("token");
-	console.log(token)
 	if(!admin.getTempData("token")&&window.location.href.replace(getProjectUrl(),"")!="login.html"){
 		top.window.location.href = getProjectUrl()+"login.html"
 	}else if(admin.getTempData("token")&&window.location.href.replace(getProjectUrl(),"")=="login.html"){
@@ -48,11 +47,21 @@ var token = "";
 /////////////////////////////////////////////////////////////
 ////////////////////////全局变量结束/////////////////////////////
 /////////////////////////////////////////////////////////////
-
+/**
+ * 
+ * ajax请求
+ * @param {Object} url
+ * @param {Object} data
+ * @param {Object} type
+ * @param {Object} success
+ */
 function sysAjax(url,data,type,success){
 	layer.load(2);
 	var $ = layui.jquery;
 	data['token'] = token;
+	if(!(url.indexOf("http://")>-1||url.indexOf("https://")>-1)){
+		url = serverUrl + url;
+	}
 	$.ajax({
 		url:url,
 		data:data,
@@ -81,4 +90,16 @@ function getProjectUrl() {
         layuiDir = jsPath.substring(0, jsPath.lastIndexOf('/') + 1);
     }
     return layuiDir.substring(0, layuiDir.indexOf('assets'));
+}
+
+/**
+ * 替换字符串中 [key] 数据
+ * 
+ * @param {Object} html	待替换的内容
+ * @param {Object} data	替换的数据{‘key’:value}
+ */
+function testHtmlReplaceContent(html,data){
+	console.log(html)
+	var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); //i g m是指分别用于指定区分大小写的匹配、全局匹配和多行匹配。
+    return html.replace(reg, function (node, key) { return data[key]; });
 }

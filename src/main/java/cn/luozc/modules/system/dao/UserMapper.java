@@ -1,6 +1,7 @@
 package cn.luozc.modules.system.dao;
 
 import cn.luozc.modules.system.model.User;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.Map;
 /**
  * 用户管理
  */
-public interface IUserDao {
+public interface UserMapper extends BaseMapper<User> {
     /**
      * 分页查询
      *

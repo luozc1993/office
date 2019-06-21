@@ -133,7 +133,7 @@
                 shade: .1
             }, function (i) {
                 layer.close(i);
-				sysAjax(serverUrl+'/system/role/delete',{"id": obj.data.id},"get",function(res){
+				sysAjax('/system/role/delete',{"id": obj.data.id},"get",function(res){
 					if(res.status){
 						layer.msg(res.msg, {icon: 1});
 						insTb.reload({}, 'data');
@@ -149,7 +149,7 @@
                 title: (mRole ? '修改' : '添加') + '角色',
                 content: $('#modelRole').html(),
                 success: function (layero, dIndex) {
-                    var url = mRole ? serverUrl+'/system/role/update' : serverUrl+'/system/role/create';
+                    var url = mRole ? '/system/role/update' : '/system/role/create';
                     form.val('modelRoleForm', mRole);  // 回显数据
                     // 表单提交事件
                     form.on('submit(modelSubmitRole)', function (data) {

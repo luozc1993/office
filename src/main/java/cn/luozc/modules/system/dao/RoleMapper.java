@@ -7,7 +7,7 @@ import cn.luozc.modules.system.model.User;
 import java.util.List;
 import java.util.Map;
 
-public interface IRoleDao {
+public interface RoleMapper {
 
     /**
      * 通过id删除数据

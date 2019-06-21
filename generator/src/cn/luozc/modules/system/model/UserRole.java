@@ -1,20 +1,17 @@
 package cn.luozc.modules.system.model;
 
-public class Role {
+public class UserRole {
     private String id;
 
-    private String roleName;
+    private String uid;
 
-    private String comments;
-
-    private Boolean isdelete;
+    private String rid;
 
     private String opuser;
 
     private Long createTime;
 
     private Long updateTime;
-
 
     public String getId() {
         return id;
@@ -24,28 +21,20 @@ public class Role {
         this.id = id == null ? null : id.trim();
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getUid() {
+        return uid;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName == null ? null : roleName.trim();
+    public void setUid(String uid) {
+        this.uid = uid == null ? null : uid.trim();
     }
 
-    public String getComments() {
-        return comments;
+    public String getRid() {
+        return rid;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments == null ? null : comments.trim();
-    }
-
-    public Boolean getIsdelete() {
-        return isdelete;
-    }
-
-    public void setIsdelete(Boolean isdelete) {
-        this.isdelete = isdelete;
+    public void setRid(String rid) {
+        this.rid = rid == null ? null : rid.trim();
     }
 
     public String getOpuser() {
