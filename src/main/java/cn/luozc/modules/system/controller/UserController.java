@@ -69,8 +69,9 @@ public class UserController {
     @RequestMapping("/updateUser")
     @ResponseBody
     public JsonData updateUser(User user, String roleId) {
+        userService.update(user);
         //默认密码123456
-        return JsonData.success(userService.update(user));
+        return JsonData.success();
     }
 
     /**

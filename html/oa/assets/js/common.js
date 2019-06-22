@@ -99,7 +99,6 @@ function getProjectUrl() {
  * @param {Object} data	替换的数据{‘key’:value}
  */
 function testHtmlReplaceContent(html,data){
-	console.log(html)
 	var reg = new RegExp("\\[([^\\[\\]]*?)\\]", 'igm'); //i g m是指分别用于指定区分大小写的匹配、全局匹配和多行匹配。
     return html.replace(reg, function (node, key) { return data[key]; });
 }
