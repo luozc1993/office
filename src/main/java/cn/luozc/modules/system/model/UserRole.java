@@ -1,12 +1,9 @@
 package cn.luozc.modules.system.model;
 
 import cn.luozc.common.utils.MD5Util;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.UUID;
 
-@TableName("sys_user_role")
 public class UserRole {
     private String id;
 
@@ -14,10 +11,8 @@ public class UserRole {
 
     private String rid;
 
-    @TableField("opUser")
     private String opuser;
 
-    @TableField("create_time")
     private Long createTime;
 
     private Long updateTime;

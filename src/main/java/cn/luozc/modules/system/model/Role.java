@@ -1,7 +1,7 @@
 package cn.luozc.modules.system.model;
 
 public class Role {
-    private String id;
+    private String rid;
 
     private String roleName;
 
@@ -15,13 +15,12 @@ public class Role {
 
     private Long updateTime;
 
-
-    public String getId() {
-        return id;
+    public String getRid() {
+        return rid;
     }
 
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
+    public void setRid(String rid) {
+        this.rid = rid;
     }
 
     public String getRoleName() {

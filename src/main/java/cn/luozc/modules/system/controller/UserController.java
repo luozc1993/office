@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -48,13 +47,18 @@ public class UserController {
      */
     @RequestMapping("/createUser")
     @ResponseBody
-    public JsonData createUser(User user, String roleId,String token) {
+    public JsonData createUser(User user, String roleId, String token) {
+        String uid = MD5Util.getMD5Str(UUID.randomUUID().toString());
         //默认密码123456
         user.setPassword(MD5Util.getMD5Str("123456"));
-        user.setId(MD5Util.getMD5Str(UUID.randomUUID().toString()));
+        user.setUid(uid);
         int insert = userService.insert(user);
-        if(insert>0){
-            userRoleService.save(new UserRole(user.getId(),roleId,TokenUtil.getUserId(token)));
+        if (insert > 0) {
+            String[] roleIds = roleId.split(",");
+            for (String rid : roleIds) {
+                userRoleService.insert(new UserRole(user.getUid(), rid, TokenUtil.getUserId(token)));
+            }
+
         }
         return JsonData.success();
     }
@@ -68,9 +72,15 @@ public class UserController {
      */
     @RequestMapping("/updateUser")
     @ResponseBody
-    public JsonData updateUser(User user, String roleId) {
+    public JsonData updateUser(User user, String roleId, String token) {
+        //修改用户信息
         userService.update(user);
-        //默认密码123456
+        //若roleId为空清除该用户所有角色关联信息
+        userRoleService.deleteByUid(user.getUid());
+        String[] roleIds = roleId.split(",");
+        for (String rid : roleIds) {
+            userRoleService.insert(new UserRole(user.getUid(), rid, TokenUtil.getUserId(token)));
+        }
         return JsonData.success();
     }
 
@@ -99,6 +109,7 @@ public class UserController {
 
     /**
      * 刪除
+     *
      * @param userId
      * @return
      */
@@ -106,19 +117,18 @@ public class UserController {
     @ResponseBody
     public JsonData deleteUser(String userId) {
         userService.delete(userId);
-        return JsonData.success("","删除成功");
+        return JsonData.success("", "删除成功");
     }
 
     /**
-     *
      * @return
      */
     @RequestMapping("/updateUserState")
     @ResponseBody
-    public JsonData updateUserState(@RequestParam Map<String, Object> map){
+    public JsonData updateUserState(@RequestParam Map<String, Object> map) {
         userService.updateUserState(map);
 
-        return JsonData.success("","修改成功");
+        return JsonData.success("", "修改成功");
     }
 
 }

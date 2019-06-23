@@ -52,7 +52,7 @@
 <!-- 表单弹窗 -->
 <script type="text/html" id="modelRole">
     <form id="modelRoleForm" lay-filter="modelRoleForm" class="layui-form model-form">
-        <input name="id" type="hidden"/>
+        <input name="rid" type="hidden"/>
         <div class="layui-form-item">
             <label class="layui-form-label">角色名</label>
             <div class="layui-input-block">
@@ -122,7 +122,7 @@
             } else if (layEvent === 'del') { // 删除
                 doDel(obj);
             } else if (layEvent === 'auth') {  // 权限管理
-                showPermModel(data.roleId);
+                showPermModel(data.rid);
             }
         });
 
@@ -133,7 +133,7 @@
                 shade: .1
             }, function (i) {
                 layer.close(i);
-				sysAjax('/system/role/delete',{"id": obj.data.id},"get",function(res){
+				sysAjax('/system/role/delete',{"id": obj.data.rid},"get",function(res){
 					if(res.status){
 						layer.msg(res.msg, {icon: 1});
 						insTb.reload({}, 'data');
@@ -172,14 +172,11 @@
                 content: '<ul id="treeAuth" class="ztree"></ul>',
                 success: function (layero, index) {
                     $(layero).children('.layui-layer-content').css({'max-height': '300px', 'overflow': 'auto'});
-                    layer.load(2);
                     var setting = {check: {enable: true}, data: {simpleData: {enable: true}}};
-                    $.get('../../json/authTree.json', {
-                        roleId: roleId
-                    }, function (res) {
-                        $.fn.zTree.init($('#treeAuth'), setting, res);
-                        layer.closeAll('loading');
-                    }, 'json');
+					sysAjax("/system/menu/menuTreeData",{},"post",function(res){
+						$.fn.zTree.init($('#treeAuth'), setting, res.data);
+						
+					})
                 },
                 yes: function (index) {
                     layer.load(2);

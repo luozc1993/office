@@ -34,7 +34,7 @@ public class RoleController {
     @RequestMapping("/create")
     @ResponseBody
     public JsonData create(Role role) {
-        role.setId(MD5Util.getMD5Str(UUID.randomUUID().toString()));
+        role.setRid(MD5Util.getMD5Str(UUID.randomUUID().toString()));
         return JsonData.success(roleService.insert(role));
     }
 

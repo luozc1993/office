@@ -3,7 +3,7 @@ package cn.luozc.modules.system.model;
 import java.util.List;
 
 public class User {
-    private String id;
+    private String uid;
 
     private String username;
 
@@ -32,6 +32,14 @@ public class User {
     private List<Role> roles;
 
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public List<Role> getRoles() {
         return roles;
     }
@@ -40,13 +48,6 @@ public class User {
         this.roles = roles;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id == null ? null : id.trim();
-    }
 
     public String getUsername() {
         return username;

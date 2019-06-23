@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.luozc.modules.system.dao.RoleMapper">
     <resultMap id="BaseResultMap" type="cn.luozc.modules.system.model.Role">
-        <id column="id" property="id" jdbcType="VARCHAR"/>
+        <id column="rid" property="rid" jdbcType="VARCHAR"/>
         <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
         <result column="comments" property="comments" jdbcType="VARCHAR"/>
         <result column="isDelete" property="isdelete" jdbcType="BIT"/>
@@ -11,7 +11,7 @@
         <result column="update_time" property="updateTime" jdbcType="BIGINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, role_name, comments, isDelete, opUser, create_time, update_time
+        rid, role_name, comments, isDelete, opUser, create_time, update_time
     </sql>
 
     <!--通过id查询信息-->
@@ -19,19 +19,19 @@
         select
         <include refid="Base_Column_List"/>
         from sys_role
-        where id = #{id,jdbcType=VARCHAR}
+        where rid = #{rid,jdbcType=VARCHAR}
     </select>
     <!--通过id删除-->
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
         delete from sys_role
-        where id = #{id,jdbcType=VARCHAR}
+        where rid = #{rid,jdbcType=VARCHAR}
      </delete>
     <!--添加数据-->
     <insert id="insertSelective" parameterType="cn.luozc.modules.system.model.Role">
         insert into sys_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
+            <if test="rid != null">
+                rid,
             </if>
             <if test="roleName != null">
                 role_name,
@@ -53,8 +53,8 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=VARCHAR},
+            <if test="rid != null">
+                #{rid,jdbcType=VARCHAR},
             </if>
             <if test="roleName != null">
                 #{roleName,jdbcType=VARCHAR},
@@ -99,7 +99,7 @@
                 update_time = #{updateTime,jdbcType=BIGINT},
             </if>
         </set>
-        where id = #{id,jdbcType=VARCHAR}
+        where rid = #{rid,jdbcType=VARCHAR}
     </update>
 
     <!--分页条件模糊查询-->

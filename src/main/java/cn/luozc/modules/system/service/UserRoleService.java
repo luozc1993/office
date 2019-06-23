@@ -1,14 +1,21 @@
 package cn.luozc.modules.system.service;
 
-import cn.luozc.modules.system.model.Role;
-import cn.luozc.modules.system.model.User;
 import cn.luozc.modules.system.model.UserRole;
-import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
-import java.util.Map;
+public interface UserRoleService {
 
-public interface UserRoleService extends IService<UserRole> {
+    /**
+     * 添加用户
+     * @param userRole
+     * @return
+     */
+    int insert(UserRole userRole);
 
+    /**
+     * 根据用户id删除用户好角色关联数据
+     * @param uid
+     * @return
+     */
+    int deleteByUid(String uid);
 
 }
